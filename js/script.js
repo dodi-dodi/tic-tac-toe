@@ -1,17 +1,20 @@
 class Game extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {player: 1};
+        this.state = {player: 1, board: Array.apply(null, {length: 9})};
         this.selectPlayer = this.selectPlayer.bind(this);
     }
-    selectPlayer() {
+    selectPlayer(clickedButton) {
+        let board = this.state.board;
+        board[clickedButton] = this.state.player;
+
         let nextPlayer;
         if (this.state.player ===1) {
             nextPlayer = 2;
         } else {
             nextPlayer = 1;
         }
-        this.setState({player: nextPlayer});
+        this.setState({player: nextPlayer, board: board});
     }
 
     render() {
@@ -30,35 +33,35 @@ class Game extends React.Component {
                 <div>
                     <div className="flex flex-center">
                         <div className="square">
-                            <Btn player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={0} player={this.state.player} onPlayerClick={this.selectPlayer}/>
                         </div>
                         <div className="square border-vertical">
-                            <Btn player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={1} player={this.state.player} onPlayerClick={this.selectPlayer}/>
                         </div>
                         <div className="square">
-                            <Btn player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={2} player={this.state.player} onPlayerClick={this.selectPlayer}/>
                         </div>
                     </div>
                     <div className="flex flex-center">
                         <div className="square border-horizontal">
-                            <Btn player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={3} player={this.state.player} onPlayerClick={this.selectPlayer}/>
                         </div>
                         <div className="square border-horizontal border-vertical">
-                            <Btn player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={4} player={this.state.player} onPlayerClick={this.selectPlayer}/>
                         </div>
                         <div className="square border-horizontal">
-                            <Btn player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={5} player={this.state.player} onPlayerClick={this.selectPlayer}/>
                         </div>
                     </div>
                     <div className="flex flex-center">
                         <div className="square">
-                            <Btn player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={6} player={this.state.player} onPlayerClick={this.selectPlayer}/>
                         </div>
                         <div className="square border-vertical">
-                            <Btn player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={7} player={this.state.player} onPlayerClick={this.selectPlayer}/>
                         </div>
                         <div className="square">
-                            <Btn player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={8} player={this.state.player} onPlayerClick={this.selectPlayer}/>
                         </div>
                     </div>
                 </div>
@@ -97,7 +100,7 @@ class Btn extends React.Component {
 
     handleChoice() {
         this.setState({clicked: this.props.player});
-        this.props.onPlayerClick();
+        this.props.onPlayerClick(this.props.position);
     }
 
     render() {
