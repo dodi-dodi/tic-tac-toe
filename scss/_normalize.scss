@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,700,700i&subset=latin-ext');
+
+/****** NORMALIZATION ******/
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: $root_font_size;
+}
+
+body {
+  margin: 0;
+  font-family: 'Raleway', sans-serif;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/****** STYLES FOR FLEX ******/
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-space-between {
+  justify-content: space-between;
+}
+
+@media (max-width: 1200px) {
+  .flex-space-between {
+    margin: 0 3em;
+  }
+}

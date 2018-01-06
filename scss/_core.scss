@@ -1,0 +1,71 @@
+h1 {
+  text-align: center;
+  font-size: 5rem;
+}
+@media (max-width: 576px) {
+  h1 {
+    font-size: 3rem;
+  }
+}
+
+
+/****** STYLES FOR ICONS ******/
+.icon-auto {
+  @extend .expander;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.fa-large {
+  font-size: 7em;
+}
+
+@media (max-width: 576px) {
+  .fa-large {
+    font-size: 3em;
+  }
+}
+.fa-times-color {
+  color: $color_red;
+}
+.fa-circle-color {
+  color: $color_blue;
+}
+
+/****** STYLES FOR BOARD ******/
+.square {
+  width: 11em;
+  height: 11em;
+}
+
+@media (max-width: 576px) {
+  .square {
+    width: 5em;
+    height: 5em;
+  }
+}
+.border-vertical {
+  border-right: $border;
+  border-left: $border;
+}
+.border-horizontal {
+  border-top: $border;
+  border-bottom: $border;
+}
+
+
+/****** STYLES FOR BUTTON ******/
+.button-auto  {
+  @extend .expander;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.button-background {
+  border: none;
+  background: none;
+  &:hover, &:focus {
+   outline: 0;
+  }
+}
+
