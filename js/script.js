@@ -1,23 +1,44 @@
 class Game extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {player: 1, board: Array.apply(null, {length: 9})};
+        this.state = {player: 1, board: Array.apply(null, {length: 9}), winner: null};
         this.selectPlayer = this.selectPlayer.bind(this);
     }
+
     selectPlayer(clickedButton) {
         let board = this.state.board;
         board[clickedButton] = this.state.player;
 
         let nextPlayer;
-        if (this.state.player ===1) {
+        if (this.state.player === 1) {
             nextPlayer = 2;
         } else {
             nextPlayer = 1;
         }
         this.setState({player: nextPlayer, board: board});
+
+        this.checkWinner(1);
+        this.checkWinner(2);
     }
 
-    render() {
+    checkWinner(player) {
+        if ((this.state.board[0] === player && this.state.board[1] === player && this.state.board[2] === player) // row 1
+            || (this.state.board[3] === player && this.state.board[4] === player && this.state.board[5] === player) // row 2
+            || (this.state.board[6] === player && this.state.board[7] === player && this.state.board[8] === player) // row 3
+            || (this.state.board[0] === player && this.state.board[3] === player && this.state.board[6] === player) // col 1
+            || (this.state.board[1] === player && this.state.board[4] === player && this.state.board[7] === player) // col 2
+            || (this.state.board[2] === player && this.state.board[5] === player && this.state.board[8] === player) // col 3
+            || (this.state.board[0] === player && this.state.board[4] === player && this.state.board[8] === player) // diag 1
+            || (this.state.board[2] === player && this.state.board[4] === player && this.state.board[6] === player)) { // diag 2
+            this.setState({winner: player})
+        }
+    }
+
+    renderWinner() {
+        return <p>Wygrał gracz {this.state.winner}</p>
+    }
+
+    renderBoard() {
         return (
             <div>
                 <div className="flex flex-space-between">
@@ -67,6 +88,14 @@ class Game extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    render() {
+        if (this.state.winner === null) {
+            return this.renderBoard()
+        } else {
+            return this.renderWinner()
+        }
     }
 }
 
