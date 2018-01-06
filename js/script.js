@@ -1,7 +1,10 @@
+const cross = 1;
+const circle = 2;
+
 class Game extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {player: 1, board: Array.apply(null, {length: 9}), winner: null};
+        this.state = {player: cross, board: Array.apply(null, {length: 9}), winner: null};
         this.selectPlayer = this.selectPlayer.bind(this);
     }
 
@@ -10,15 +13,15 @@ class Game extends React.Component {
         board[clickedButton] = this.state.player;
 
         let nextPlayer;
-        if (this.state.player === 1) {
-            nextPlayer = 2;
+        if (this.state.player === cross) {
+            nextPlayer = circle;
         } else {
-            nextPlayer = 1;
+            nextPlayer = cross;
         }
         this.setState({player: nextPlayer, board: board});
 
-        this.checkWinner(1);
-        this.checkWinner(2);
+        this.checkWinner(cross);
+        this.checkWinner(circle);
     }
 
     checkWinner(player) {
@@ -133,9 +136,9 @@ class Btn extends React.Component {
     }
 
     render() {
-        if (this.state.clicked === 1) {
+        if (this.state.clicked === cross) {
             return this.renderCross();
-        } else if (this.state.clicked === 2) {
+        } else if (this.state.clicked === circle) {
             return this.renderCircle();
         } else {
             return this.renderDefault();
