@@ -1,6 +1,10 @@
 const cross = 1;
 const circle = 2;
 
+function refreshPage(){
+    window.location.reload();
+}
+
 class Game extends React.Component {
     constructor(props) {
         super(props);
@@ -37,11 +41,23 @@ class Game extends React.Component {
         }
     }
 
-    renderWinner() {
-        return <p>Wygrał gracz {this.state.winner}</p>
+    showWinner() {
+        return (
+            <div>
+                <span>Player {this.state.winner} won!</span> <br/>
+                <button onClick={refreshPage}>Play again</button>
+            </div>
+        )
     }
 
-    renderBoard() {
+    showCurrentPlayer() {
+        return <div>Current Player: {this.state.player}</div>
+    }
+
+    render() {
+        if (this.state.winner !== null) {
+            document.getElementById("disable-layer").style.display='block';
+        }
         return (
             <div>
                 <div className="flex flex-space-between">
@@ -49,12 +65,14 @@ class Game extends React.Component {
                         Player 1:
                         <span><i className="fa fa-times fa-times-color fa-2x"/></span>
                     </h2>
+                    {this.state.winner === null ? this.showCurrentPlayer() : this.showWinner()}
                     <h2>
                         Player 2:
                         <span><i className="fa fa-circle-o fa-circle-color fa-2x"/></span>
                     </h2>
                 </div>
-                <div>
+                <div id="game-board">
+                    <div id="disable-layer"/>
                     <div className="flex flex-center">
                         <div className="square">
                             <Btn position={0} player={this.state.player} onPlayerClick={this.selectPlayer}/>
@@ -91,14 +109,6 @@ class Game extends React.Component {
                 </div>
             </div>
         );
-    }
-
-    render() {
-        if (this.state.winner === null) {
-            return this.renderBoard()
-        } else {
-            return this.renderWinner()
-        }
     }
 }
 
