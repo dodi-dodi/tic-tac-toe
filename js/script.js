@@ -1,28 +1,31 @@
 const cross = 1;
 const circle = 2;
 
-function refreshPage(){
+function refreshPage() {
     window.location.reload();
 }
 
 class Game extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {player: cross, board: Array.apply(null, {length: 9}), winner: null};
-        this.selectPlayer = this.selectPlayer.bind(this);
+        this.state = {
+            player: cross,
+            board: Array.from({length: 9}),
+            winner: null,
+            availableBtns: 8, // board length index
+        };
+        this.roundSummary = this.roundSummary.bind(this);
     }
 
-    selectPlayer(clickedButton) {
+    roundSummary(clickedButton) {
         let board = this.state.board;
         board[clickedButton] = this.state.player;
 
-        let nextPlayer;
-        if (this.state.player === cross) {
-            nextPlayer = circle;
-        } else {
-            nextPlayer = cross;
-        }
-        this.setState({player: nextPlayer, board: board});
+        this.setState({
+            player: this.state.player === cross ? circle : cross,
+            board: board,
+            availableBtns: this.state.availableBtns - 1,
+        });
 
         this.checkWinner(cross);
         this.checkWinner(circle);
@@ -39,12 +42,16 @@ class Game extends React.Component {
             || (this.state.board[2] === player && this.state.board[4] === player && this.state.board[6] === player)) { // diag 2
             this.setState({winner: player})
         }
+
+        if (this.state.availableBtns === 0 && this.state.winner === null) {
+            this.setState({winner: 0});
+        }
     }
 
     showWinner() {
         return (
             <div>
-                <span>Player {this.state.winner} won!</span> <br/>
+                <span>{this.state.winner === 0 ? "Draw" : "Player" + this.state.winner + " won!"}</span> <br/>
                 <button onClick={refreshPage}>Play again</button>
             </div>
         )
@@ -75,35 +82,35 @@ class Game extends React.Component {
                     <div id="disable-layer"/>
                     <div className="flex flex-center">
                         <div className="square">
-                            <Btn position={0} player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={0} player={this.state.player} onPlayerClick={this.roundSummary}/>
                         </div>
                         <div className="square border-vertical">
-                            <Btn position={1} player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={1} player={this.state.player} onPlayerClick={this.roundSummary}/>
                         </div>
                         <div className="square">
-                            <Btn position={2} player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={2} player={this.state.player} onPlayerClick={this.roundSummary}/>
                         </div>
                     </div>
                     <div className="flex flex-center">
                         <div className="square border-horizontal">
-                            <Btn position={3} player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={3} player={this.state.player} onPlayerClick={this.roundSummary}/>
                         </div>
                         <div className="square border-horizontal border-vertical">
-                            <Btn position={4} player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={4} player={this.state.player} onPlayerClick={this.roundSummary}/>
                         </div>
                         <div className="square border-horizontal">
-                            <Btn position={5} player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={5} player={this.state.player} onPlayerClick={this.roundSummary}/>
                         </div>
                     </div>
                     <div className="flex flex-center">
                         <div className="square">
-                            <Btn position={6} player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={6} player={this.state.player} onPlayerClick={this.roundSummary}/>
                         </div>
                         <div className="square border-vertical">
-                            <Btn position={7} player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={7} player={this.state.player} onPlayerClick={this.roundSummary}/>
                         </div>
                         <div className="square">
-                            <Btn position={8} player={this.state.player} onPlayerClick={this.selectPlayer}/>
+                            <Btn position={8} player={this.state.player} onPlayerClick={this.roundSummary}/>
                         </div>
                     </div>
                 </div>
@@ -156,7 +163,4 @@ class Btn extends React.Component {
     }
 }
 
-ReactDOM.render(
-    <Game/>,
-    document.getElementById("root")
-);
+ReactDOM.render(<Game/>, document.getElementById("root"));
