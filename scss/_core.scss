@@ -1,13 +1,16 @@
-h1 {
+.main-title {
   text-align: center;
   font-size: 5rem;
 }
-@media (max-width: 576px) {
-  h1 {
-    font-size: 3rem;
-  }
+
+.info-player {
+  margin: 0;
 }
 
+.info-content {
+  height: 10rem;
+  position: relative;
+}
 
 /****** STYLES FOR ICONS ******/
 .icon-auto {
@@ -16,20 +19,36 @@ h1 {
     cursor: pointer;
   }
 }
+
 .fa-large {
   font-size: 7em;
 }
 
 @media (max-width: 576px) {
   .fa-large {
-    font-size: 3em;
+    font-size: 5em;
   }
 }
-.fa-times-color {
-  color: $color_red;
+
+.icon-content {
+  position: relative;
+  margin-right: 3rem;
 }
+
+.fa-times-position {
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
+  margin-left: .3em;
+}
+
+.fa-times-color {
+  color: $color_cross;
+}
+
 .fa-circle-color {
-  color: $color_blue;
+  color: $color_circle;
+
 }
 
 /****** STYLES FOR BOARD ******/
@@ -38,40 +57,36 @@ h1 {
   height: 11em;
 }
 
-@media (max-width: 576px) {
-  .square {
-    width: 5em;
-    height: 5em;
-  }
-}
 .border-vertical {
   border-right: $border;
   border-left: $border;
 }
+
 .border-horizontal {
   border-top: $border;
   border-bottom: $border;
 }
 
-
 /****** STYLES FOR BUTTON ******/
-.button-auto  {
+.button-auto {
   @extend .expander;
   &:hover {
     cursor: pointer;
   }
 }
+
 .button-background {
   border: none;
   background: none;
   &:hover, &:focus {
-   outline: 0;
+    outline: 0;
   }
 }
 
 #game-board {
   position: relative;
 }
+
 #disable-layer {
   /* Do not display it on entry */
   display: none;
@@ -79,7 +94,7 @@ h1 {
   /* Display it on the layer with index 1001.
      Make sure this is the highest z-index value
      used by layers on that page */
-  z-index:1001;
+  z-index: 1001;
 
   /* make it cover the whole screen */
   position: absolute;
@@ -90,6 +105,37 @@ h1 {
 
   /* make it white but fully transparent */
   background-color: white;
-  opacity:.00;
+  opacity: .00;
   filter: alpha(opacity=00);
+}
+
+.current-player {
+  display: block;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: $color_black_light;
+}
+
+.show-winner {
+  display: block;
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: center;
+  color: $color_black_light;
+}
+
+.play-again {
+  display: block;
+  border: 1px solid $color_button;
+  background: $color_button;
+  color: white;
+  cursor: pointer;
+  margin: 1rem auto;
+  padding: .6rem 0.5rem;
+  font-size: 1.2em;
+  font-weight: 500;
+  transition: all 0.3s ease 0s;
+  &:hover {
+    background: $color_button_dark;
+  }
 }

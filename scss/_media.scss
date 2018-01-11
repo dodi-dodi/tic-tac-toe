@@ -1,0 +1,16 @@
+@media (max-width: 576px) {
+  .main-title {
+    font-size: 2rem;
+  }
+  .info-player,
+  .show-winner,
+  .current-player {
+    font-size: 1.2rem;
+  }
+
+  .square {
+    width: 5em;
+    height: 5em;
+  }
+}
+

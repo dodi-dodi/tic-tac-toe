@@ -51,14 +51,14 @@ class Game extends React.Component {
     showWinner() {
         return (
             <div>
-                <span>{this.state.winner === 0 ? "Draw" : "Player" + this.state.winner + " won!"}</span> <br/>
-                <button onClick={refreshPage}>Play again</button>
+                <span className="show-winner">{this.state.winner === 0 ? "Draw" : "Player " + this.state.winner + " won!"}</span> <br/>
+                <button onClick={refreshPage} className="play-again">Play again</button>
             </div>
         )
     }
 
     showCurrentPlayer() {
-        return <div>Current Player: {this.state.player}</div>
+        return <div className="current-player">Current Player: {this.state.player}</div>
     }
 
     render() {
@@ -67,15 +67,15 @@ class Game extends React.Component {
         }
         return (
             <div>
-                <div className="flex flex-space-between">
-                    <h2>
+                <div className="flex flex-space-between info-content">
+                    <h2 className="info-player">
                         Player 1:
-                        <span><i className="fa fa-times fa-times-color fa-2x"/></span>
+                        <span className="icon-content"><i className="fa fa-times fa-times-position fa-times-color  fa-2x"/></span>
                     </h2>
                     {this.state.winner === null ? this.showCurrentPlayer() : this.showWinner()}
-                    <h2>
+                    <h2 className="info-player">
                         Player 2:
-                        <span><i className="fa fa-circle-o fa-circle-color fa-2x"/></span>
+                        <span className="icon-content"><i className="fa fa-circle-o fa-times-position fa-circle-color fa-2x"/></span>
                     </h2>
                 </div>
                 <div id="game-board">

@@ -1,6 +1,10 @@
-$color_red: #FF6666;
-$color_blue: #9999FF;
+$color_cross: #FF6666;
+$color_circle: #9999FF;
 $color_black: #080808;
+$color_button: #87d2ff;
+
+$color_button_dark: darken($color_button, 10%);
+$color_black_light: lighten($color_black, 20%);
 
 $root_font_size: 16px;
 $border: .7em solid $color_black;
