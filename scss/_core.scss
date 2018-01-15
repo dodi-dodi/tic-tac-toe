@@ -11,6 +11,9 @@
   height: 10rem;
   position: relative;
 }
+.circle-player {
+  text-align: right;
+}
 
 /****** STYLES FOR ICONS ******/
 .icon-auto {
@@ -22,12 +25,6 @@
 
 .fa-large {
   font-size: 7em;
-}
-
-@media (max-width: 576px) {
-  .fa-large {
-    font-size: 5em;
-  }
 }
 
 .icon-content {
@@ -88,22 +85,13 @@
 }
 
 #disable-layer {
-  /* Do not display it on entry */
   display: none;
-
-  /* Display it on the layer with index 1001.
-     Make sure this is the highest z-index value
-     used by layers on that page */
   z-index: 1001;
-
-  /* make it cover the whole screen */
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-
-  /* make it white but fully transparent */
   background-color: white;
   opacity: .00;
   filter: alpha(opacity=00);
@@ -130,8 +118,9 @@
   background: $color_button;
   color: white;
   cursor: pointer;
-  margin: 1rem auto;
-  padding: .6rem 0.5rem;
+  margin: 2rem auto;
+  padding: .4rem;
+  min-width: 7rem;
   font-size: 1.2em;
   font-weight: 500;
   transition: all 0.3s ease 0s;

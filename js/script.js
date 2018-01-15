@@ -73,7 +73,7 @@ class Game extends React.Component {
                         <span className="icon-content"><i className="fa fa-times fa-times-position fa-times-color  fa-2x"/></span>
                     </h2>
                     {this.state.winner === null ? this.showCurrentPlayer() : this.showWinner()}
-                    <h2 className="info-player">
+                    <h2 className="info-player circle-player">
                         Player 2:
                         <span className="icon-content"><i className="fa fa-circle-o fa-times-position fa-circle-color fa-2x"/></span>
                     </h2>
