@@ -1,3 +1,4 @@
+const draw = 0;
 const cross = 1;
 const circle = 2;
 
@@ -44,14 +45,14 @@ class Game extends React.Component {
         }
 
         if (this.state.availableBtns === 0 && this.state.winner === null) {
-            this.setState({winner: 0});
+            this.setState({winner: draw});
         }
     }
 
     showWinner() {
         return (
             <div>
-                <span className="show-winner">{this.state.winner === 0 ? "Draw" : "Player " + this.state.winner + " won!"}</span> <br/>
+                <span className="show-winner">{this.state.winner === draw ? "Draw" : "Player " + this.state.winner + " won!"}</span> <br/>
                 <button onClick={refreshPage} className="play-again">Play again</button>
             </div>
         )
